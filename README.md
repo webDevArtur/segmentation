@@ -1,15 +1,30 @@
-# Проект по сегментации новообразований и узоров по Киттлеру
+# React + TypeScript + Vite
 
-Этот проект включает в себя frontend часть системы помощи принятия решения, в частности сегментации новообразования и узоров по Киттлеру.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Основные компоненты
+Currently, two official plugins are available:
 
-- Разработка компонентов для загрузки медицинских изображений на сервер для последующей обработки и анализа.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- Создание компонентов для отображения результатов сегментации на загруженных изображениях, таких как выделенные области с опухолями или узорами.
+## Expanding the ESLint configuration
 
-- Создание элементов управления для взаимодействия пользователя с результатами сегментации, таких как кнопки для изменения параметров алгоритмов или выбора определенных областей для дополнительного анализа.
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Обеспечение адаптивности интерфейса для корректного отображения на различных устройствах и экранах, что позволит медицинским специалистам использовать приложение на мобильных устройствах или на настольных компьютерах.
+- Configure the top-level `parserOptions` property like this:
 
-- Взаимодействие с бэкендом для передачи данных о загруженных изображениях, получения результатов сегментации и отображения их на фронтенде.
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
