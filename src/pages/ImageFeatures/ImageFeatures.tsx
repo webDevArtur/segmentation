@@ -8,6 +8,7 @@ import ImageMask from "../ImageMask/ImageMask.tsx";
 import {uploadImageAndGetFeatures} from './api';
 import {applyMask, applyMaskToImage} from './imageFeaturesUtils.ts';
 import ImageUpload from '../ImageUpload/ImageUpload.tsx';
+import ClassificationComponent from "../ClassificationComponent/ClassificationComponent.tsx";
 
 type ImageData = {
     [key: number]: string;
@@ -58,6 +59,7 @@ const ImageFeatures: React.FC = () => {
     };
 
     return (<ThemeProvider theme={theme}>
+
             {!image && <ImageUpload setImage={setImage}/>}
             {image && (<Paper elevation={3} style={{padding: theme.spacing(3), marginTop: theme.spacing(3)}}>
                     <Box sx={{
@@ -104,6 +106,7 @@ const ImageFeatures: React.FC = () => {
                 </Paper>)}
             {image && imagesData && (<>
                     <Paper elevation={3} style={{padding: theme.spacing(3), marginTop: theme.spacing(3)}}>
+                        <ClassificationComponent selectedImage={image} />
                         <Box sx={{
                             display: 'flex',
                             width: '100%',
