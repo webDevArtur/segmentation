@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CircularProgress, Typography, Box } from '@mui/material';
+import { CircularProgress, Typography, Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 interface Prediction {
     predicted_classes: string[];
@@ -75,14 +75,58 @@ const ClassificationComponent: React.FC<ClassificationComponentProps> = ({ selec
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                {predictions.map((prediction, index) => (
-                    <div key={index} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                        <Typography variant="h4" fontWeight="bold">{prediction.predicted_classes[0]}</Typography>
-                        <Typography variant="body1">Точность: {prediction.predictions[prediction.predicted_classes[0]].confidence.toFixed(2)}</Typography>
-                    </div>
-                ))}
-        </div>
+        <TableContainer component={Paper} sx={{mb: 2}}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell
+                            sx={{
+                                color: 'white',
+                                fontWeight: 'bold',
+                                bgcolor: 'primary.main',
+                            }}
+                        >
+                            Class
+                        </TableCell>
+                        <TableCell
+                            align="right"
+                            sx={{
+                                color: 'white',
+                                fontWeight: 'bold',
+                                bgcolor: 'primary.main',
+                            }}
+                        >
+                            Confidence
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {predictions.map((prediction, index) => (
+                        Object.keys(prediction.predictions)
+                            .sort((a, b) => prediction.predictions[b].confidence - prediction.predictions[a].confidence)
+                            .map((className, i) => (
+                                <TableRow
+                                    key={`${index}-${i}`}
+                                >
+                                    <TableCell
+                                        component="th"
+                                        scope="row"
+                                        sx={{ fontWeight: i === 0 ? 'bold' : 'normal'}}
+                                    >
+                                        {className}
+                                    </TableCell>
+                                    <TableCell
+                                        align="right"
+                                        sx={{ fontWeight: i === 0 ? 'bold' : 'normal'}}
+                                    >
+                                        {prediction.predictions[className].confidence.toFixed(2)}
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 };
 

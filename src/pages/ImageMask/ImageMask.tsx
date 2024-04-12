@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Box, CircularProgress} from '@mui/material';
+import {Box, CircularProgress, Typography} from '@mui/material';
 import {TransformComponent, TransformWrapper} from "react-zoom-pan-pinch";
 import fetchData from './api';
 import applySegmentationMask from './imageMaskUtils.ts';
@@ -34,6 +34,7 @@ const ImageMask: React.FC<ImageResultsProps> = ({selectedImage}) => {
     return (<>
             {loading && <CircularProgress sx={{marginTop: '10px'}}/>}
             {imageUrl && !loading && (<Box sx={{marginTop: '10px'}}>
+                    <Typography variant="h6">Маска изображения</Typography>
                     <TransformWrapper>
                         <TransformComponent>
                             <img
